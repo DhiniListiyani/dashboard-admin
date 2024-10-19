@@ -1,0 +1,236 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Container */
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Header */
+.header {
+    background-color: #4CAF50;
+    padding: 20px;
+    color: white;
+    text-align: center;
+    font-size: 24px;
+}
+
+/* Stats Section */
+.stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.stat-box {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 30%;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.stat-box:hover {
+    transform: translateY(-5px);
+}
+
+.stat-box h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #555;
+}
+
+.stat-box p {
+    font-size: 28px;
+    color: #333;
+}
+
+/* Post Management */
+.post-management h2 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.add-post-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.add-post-btn:hover {
+    background-color: #45a049;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f9f9f9;
+    color: #333;
+    font-weight: bold;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Buttons */
+.edit-btn, .delete-btn {
+    background-color: #ff9800;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-right: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.edit-btn:hover {
+    background-color: #e68900;
+}
+
+.delete-btn {
+    background-color: #f44336;
+}
+
+.delete-btn:hover {
+    background-color: #d32f2f;
+}
+
+/* Post Form */
+#post-form {
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+#post-form h3 {
+    margin-top: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+#post-form input[type="text"],
+#post-form textarea,
+#post-form select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#post-form button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#post-form button:hover {
+    background-color: #45a049;
+}
+
+/* Atur tata letak tabel komentar */
+.comment-table {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+.comment-table td {
+    padding: 10px;
+    vertical-align: top;
+}
+
+.comment-table label {
+    font-weight: bold;
+    display: inline-block;
+    width: 100px;
+}
+
+/* Style input dan textarea */
+.comment-table input[type="text"],
+.comment-table textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Style button */
+.comment-table button {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.comment-table button:hover {
+    background-color: #45a049;
+}
+
+/* Responsif: Jika layar lebih kecil */
+@media screen and (max-width: 600px) {
+    .comment-table {
+        width: 100%;
+    }
+
+    .comment-table tr {
+        display: flex;
+        flex-direction: column; /* Menyusun elemen dalam kolom */
+        margin-bottom: 15px;
+    }
+
+    .comment-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .comment-table label {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+}

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        .container { padding: 20px; max-width: 1200px; margin: auto; }
+        .header { background-color: #4CAF50; padding: 20px; color: white; text-align: center; }
+        .stats { display: flex; justify-content: space-between; margin-bottom: 20px; }
+        .stat-box { background-color: #f0f0f0; padding: 20px; text-align: center; width: 30%; }
+        .post-management { margin-top: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        table th, table td { padding: 10px; text-align: left; border: 1px solid #ddd; }
+        .add-post-btn { background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+        .edit-btn, .delete-btn { background-color: #ff9800; color: white; padding: 5px 10px; border: none; cursor: pointer; }
+        .edit-btn { margin-right: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Dashboard Admin</h1>
+    </div>
+
+    <div class="container">
+        <!-- Ringkasan Statistik -->
+        <div class="stats">
+            <div class="stat-box">
+                <h3>Postingan</h3>
+                <p>2</p>
+            </div>
+            <div class="stat-box">
+                <h3>Komentar</h3>
+                <p>0</p>
+            </div>
+            <div class="stat-box">
+                <h3>Pengunjung</h3>
+                <p>2</p>
+            </div>
+        </div>
+
+        <!-- Manajemen Postingan -->
+        <div class="post-management">
+            <h2>Daftar Postingan</h2>
+            <button class="add-post-btn">Tambah Postingan Baru</button>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Judul</th>
+                        <th>Tanggal</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Inovasi Teknologi Terbaru</td>
+                        <td>2024-09-20</td>
+                        <td>Terbit</td>
+                        <td>
+                            <button class="edit-btn">Edit</button>
+                            <button class="delete-btn">Hapus</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Teknologi Masa Depan</td>
+                        <td>2024-09-25</td>
+                        <td>Terbit</td>
+                        <td>
+                            <button class="edit-btn">Edit</button>
+                            <button class="delete-btn">Hapus</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Tambahkan Komentar</h2>
+
+
+<!-- Tempatkan Komentar yang Sudah Ada -->
+<h3>Komentar:</h3>
+<div id="comment-section">
+    <form id="comment-form">
+        <table class="comment-table">
+            <tr>
+                <td><label for="username">Nama:</label></td>
+                <td><input type="text" id="username" required></td>
+            </tr>
+            <tr>
+                <td><label for="comment-content">Komentar:</label></td>
+                <td><textarea id="comment-content" required></textarea></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button type="submit">Kirim Komentar</button></td>
+            </tr>
+        </table>
+    </form>
+    
+    <!-- Komentar akan dimuat di sini dengan JavaScript -->
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const postId = "POST_ID_HERE"; // Ganti dengan ID postingan saat ini
+        loadComments(postId);
+
+        // Tambah event listener untuk form komentar
+        document.getElementById('comment-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            addComment(postId);
+        });
+    });
+
+    // Fungsi untuk memuat komentar
+    function loadComments(postId) {
+        fetch(`/api/posts/${postId}/comments`)
+            .then(response => response.json())
+            .then(data => {
+                let commentSection = document.getElementById('comment-section');
+                commentSection.innerHTML = '';
+
+                data.forEach(comment => {
+                    commentSection.innerHTML += `
+                        <div>
+                            <strong>${comment.username}</strong> berkata:
+                            <p>${comment.content}</p>
+                            <small>${new Date(comment.date).toLocaleDateString()}</small>
+                            <hr>
+                        </div>
+                    `;
+                });
+            });
+    }
+
+    // Fungsi untuk menambahkan komentar
+    function addComment(postId) {
+        const username = document.getElementById('username').value;
+        const content = document.getElementById('comment-content').value;
+
+        fetch(`/api/posts/${postId}/comments`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: username,
+                content: content
+            })
+        }).then(response => response.json())
+          .then(() => {
+              // Bersihkan form dan muat ulang komentar
+              document.getElementById('username').value = '';
+              document.getElementById('comment-content').value = '';
+              loadComments(postId);
+          });
+    }
+</script>
+
+
+        <!-- Tambahkan di bawah bagian Manajemen Postingan -->
+<div class="comment-management">
+    <h2>Daftar Komentar</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nama Pengguna</th>
+                <th>Komentar</th>
+                <th>Tanggal</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody id="comment-list">
+            <!-- Komentar akan dimuat di sini melalui JavaScript -->
+        </tbody>
+    </table>
+</div>
+    </div>
+
+</body>
+</html>
